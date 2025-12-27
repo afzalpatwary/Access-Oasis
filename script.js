@@ -8,15 +8,20 @@ const confirmation = document.getElementById("confirmation");
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  // Honeypot protection
-  if (form.company.value) return;
-
-  if (!form.email.value) {
-    confirmation.textContent = "Please enter a valid email address.";
+  // Invisible CAPTCHA (honeypot)
+  if (form.company.value) {
     return;
   }
 
-  confirmation.textContent = "Submitting…";
+  // Basic email validation
+  if (!form.email.value) {
+    confirmation.textContent = "Please enter a valid email address.";
+    confirmation.style.color = "#b00020"; // accessible red
+    return;
+  }
+
+  confirmation.textContent = "Submitting...";
+  confirmation.style.color = "#000";
 
   const templateParams = {
     name: form.name.value || "Not provided",
@@ -25,11 +30,11 @@ form.addEventListener("submit", function (e) {
     notes: form.notes.value || "None"
   };
 
-  // Send admin email
+  // 1️⃣ Send admin notification
   emailjs
     .send("service_t04cgsc", "template_xrlr4pb", templateParams)
     .then(() => {
-      // Send auto-reply
+      // 2️⃣ Send auto-reply to user
       return emailjs.send(
         "service_t04cgsc",
         "template_s3d7925",
@@ -37,16 +42,13 @@ form.addEventListener("submit", function (e) {
       );
     })
     .then(() => {
-      // Accessible confirmation
-      confirmation.textContent = "Submitted, thank you! Redirecting…";
-
-      // WCAG-friendly delay before redirect
-      setTimeout(() => {
-        window.location.href = "thank-you.html";
-      }, 1200);
+      confirmation.textContent = "Submitted, thank you!";
+      confirmation.style.color = "#1b7f3a"; // accessible green
+      form.reset();
     })
     .catch(() => {
       confirmation.textContent =
         "There was an error sending your submission. Please try again.";
+      confirmation.style.color = "#b00020";
     });
 });

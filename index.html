@@ -1,44 +1,78 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Access Oasis – Sign Up</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<main class="page-wrapper">
-  <section class="content-box" aria-labelledby="signup-title">
-    <h1 id="signup-title">Sign Up for Access Oasis Updates</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Access Oasis – Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-    <form id="signupForm" novalidate aria-describedby="confirmation">
-      <label for="name">Name (optional)</label>
-      <input id="name" type="text" name="name">
+  <body>
+    <main class="page-wrapper" id="main">
+      <section class="content-box" aria-labelledby="signup-title">
+        <h1 id="signup-title">Sign Up for Access Oasis Updates</h1>
 
-      <label for="email">Email (required)</label>
-      <input id="email" type="email" name="email" required aria-required="true">
+        <form
+          id="signupForm"
+          novalidate
+          aria-describedby="confirmation"
+          aria-live="polite"
+        >
+          <!-- Name -->
+          <label for="name">Name (optional)</label>
+          <input id="name" type="text" name="name" autocomplete="name" />
 
-      <label class="checkbox">
-        <input class="checkbox-input" type="checkbox" name="updates">
-        Send me Access Oasis email updates
-      </label>
+          <!-- Email -->
+          <label for="email">Email (required)</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            required
+            aria-required="true"
+            autocomplete="email"
+          />
 
-      <label for="notes">Access needs or other notes? (optional)</label>
-      <textarea id="notes" name="notes"></textarea>
+          <!-- Checkbox -->
+          <label class="checkbox">
+            <input
+              class="checkbox-input"
+              type="checkbox"
+              name="updates"
+              value="yes"
+            />
+            Send me Access Oasis email updates
+          </label>
 
-      <!-- Honeypot field -->
-      <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden">
+          <!-- Notes -->
+          <label for="notes">Access needs or other notes? (optional)</label>
+          <textarea id="notes" name="notes" rows="4"></textarea>
 
-      <button type="submit">Submit</button>
-    </form>
+          <!-- ✅ Invisible CAPTCHA (honeypot) -->
+          <input
+            type="text"
+            name="company"
+            tabindex="-1"
+            autocomplete="off"
+            class="hidden"
+            aria-hidden="true"
+          />
 
-    <p id="confirmation" role="status" aria-live="polite" class="confirmation"></p>
-  </section>
-</main>
+          <button type="submit">Submit</button>
+        </form>
 
-<!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script src="script.js"></script>
-</body>
+        <!-- ✅ On-screen confirmation message (NO redirect) -->
+        <p
+          id="confirmation"
+          role="status"
+          aria-live="polite"
+          class="confirmation"
+        ></p>
+      </section>
+    </main>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

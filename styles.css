@@ -51,6 +51,16 @@ button {
   font-weight: bold;
 }
 
+
+.confirmation.success {
+  color: #1b7f3a;
+}
+
+.confirmation.error {
+  color: #b00020;
+}
+
+
 .hidden {
   display: none;
 }
