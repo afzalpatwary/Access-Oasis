@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Access Oasis – Sign Up</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="page-wrapper">
+  <section class="content-box" aria-labelledby="signup-title">
+    <h1 id="signup-title">Sign Up for Access Oasis Updates</h1>
+
+    <form id="signupForm" novalidate aria-describedby="confirmation">
+      <label for="name">Name (optional)</label>
+      <input id="name" type="text" name="name">
+
+      <label for="email">Email (required)</label>
+      <input id="email" type="email" name="email" required aria-required="true">
+
+      <label class="checkbox">
+        <input class="checkbox-input" type="checkbox" name="updates">
+        Send me Access Oasis email updates
+      </label>
+
+      <label for="notes">Access needs or other notes? (optional)</label>
+      <textarea id="notes" name="notes"></textarea>
+
+      <!-- Honeypot field -->
+      <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden">
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <p id="confirmation" role="status" aria-live="polite" class="confirmation"></p>
+  </section>
+</main>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
